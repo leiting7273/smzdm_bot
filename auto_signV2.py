@@ -139,7 +139,7 @@ for user in user_tuple:
 # 把值得买的cookie放入下面的单引号里面  有几个帐号就弄几个（默认设置了3个 根据自己情况改）
 cookie_list = ['smzdm_version=10.4.40;device_type=XiaomiMi-4c;client_id=05018a2f057aa1474d938d08937599ae.1681390298540;rs_id2=;apk_partner_name=smzdm_wap;last_article_info=;oaid=;rs_id4=;imei=;register_time=1484800684;login=1;smzdm_id=5336577653;session_id=05018a2f057aa1474d938d08937599ae.1681391520250;partner_name=smzdm_wap;device_recfeed_setting=%7B%22haojia_recfeed_switch%22%3A%221%22%2C%22homepage_sort_switch%22%3A%221%22%2C%22other_recfeed_switch%22%3A%221%22%2C%22shequ_recfeed_switch%22%3A%221%22%7D;is_new_user=0;android_id=bcb03b6d519005c3b298650af9b85e60;partner_id=165;apk_partner_id=165;rs_id3=;rs_id1=;pid=j2TWcApUVogBiOeqmDIA5vApMapF66YoiwRIkQGK605zbfQDpoHn1A%3D%3D;sess=BB-hFldh%2F2fV1Xpz4aGSVyDYKNQ485xlYHPFj%2BgzznnBk8%2FjZraMmYCGxtSCln7j3RoRaVjU1s3fnC43EjVHl0cXVuIEFo%3D;longitude=960c836c68ce48d4;device_smzdm_version_code=880;new_device_id=bcb03b6d519005c3b298650af9b85e60;rs_id5=;network=1;device_system_version=5.1.1;device_id=05018a2f057aa1474d938d08937599ae;device_push=1;sessionID=05018a2f057aa1474d938d08937599ae.1681391520250;device_smzdm=android;active_time=1681391522;basic_v=0;latitude=960c836c68ce48d4;device_s=bcb03b6d519005c3b298650af9b85e60;device_smzdm_version=10.4.40;ab_test=c;']
 # 活动id
-active_id = ['ljX8qVlEA7','er2g3aeEAK']
+active_id = ['ljX8qVlEA7']
 
 def getActiveId():
     url = "https://m.smzdm.com/zhuanti/life/choujiang/"
