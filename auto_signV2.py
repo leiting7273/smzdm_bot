@@ -6,7 +6,7 @@ import random
 import time
 import requests
 import re,json
-
+import sys
 
 COOKIE = sys.argv[1]
 SK = sys.argv[2]
