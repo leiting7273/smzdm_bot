@@ -122,9 +122,58 @@ def all_reward(cookie: str) -> bool:
     return reward(url, cookie)
 
 
-def extra_reward(cookie: str) -> bool:
-    url = 'https://user-api.smzdm.com/checkin/extra_reward'
-    return reward(url, cookie)
+def _show_view_v2(cookie):
+    url = "https://user-api.smzdm.com/checkin/show_view_v2"
+    headers, timestamp = get_headers_and_timestamp(cookie)
+    data = {
+        'weixin': '1',
+        'time': timestamp,
+        'basic_v': '0',
+        'f': 'android',
+        'v': '10.4.40',
+    }
+    data['sign'] = get_sign(data)
+    res = requests.post(url, headers=headers, data=data).json()
+    return res
+
+
+def extra_reward(cookie) -> bool:
+    continue_checkin_reward_show = False
+    userdata_v2 = self._show_view_v2(cookie)
+    try:
+        for item in userdata_v2["data"]["rows"]:
+            if item["cell_type"] == "18001":
+                continue_checkin_reward_show = item["cell_data"][
+                    "checkin_continue"
+                ]["continue_checkin_reward_show"]
+                break
+    except Exception as e:
+        print(f"检查额外奖励失败: {e}\n")
+        msg = "检查额外奖励失败: {e}\n"
+    if not continue_checkin_reward_show:
+        print("今天没有额外奖励\n")
+        msg = "今天没有额外奖励\n"
+        return msg 
+    url = "https://user-api.smzdm.com/checkin/extra_reward"
+
+    headers, timestamp = get_headers_and_timestamp(cookie)
+    data = {
+        'weixin': '1',
+        'time': timestamp,
+        'basic_v': '0',
+        'f': 'android',
+        'v': '10.4.40',
+    }
+    data['sign'] = get_sign(data)
+    res = requests.post(url, headers=headers, data=data).json()
+    print(url.split('/')[-1], '--->', res)
+
+    if res['error_code'] == '0':
+        return True
+    if res['error_code'] == '4':
+        return False
+    else:
+        raise Exception(res['error_msg'])
 
 
 for user in user_tuple:
