@@ -139,8 +139,8 @@ def _show_view_v2(cookie):
 
 def extra_reward(cookie) -> bool:
     continue_checkin_reward_show = False
-    userdata_v2 = self._show_view_v2(cookie)
     try:
+        userdata_v2 = self._show_view_v2(cookie)
         for item in userdata_v2["data"]["rows"]:
             if item["cell_type"] == "18001":
                 continue_checkin_reward_show = item["cell_data"][
