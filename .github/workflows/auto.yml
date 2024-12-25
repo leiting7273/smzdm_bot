@@ -36,6 +36,13 @@ jobs:
       # 配置安装依赖包
       - name: Install requirements
         run: pip install -r requirements.txt
+      # 验证secrets配置
+      - name: Check secrets
+        run: |
+          echo "准备运行脚本"
+          echo "COOKIE is set: ${{ secrets.COOKIE != '' }}"
+          echo "SK is set: ${{ secrets.SK != '' }}"
+          echo "TOKEN is set: ${{ secrets.TOKEN != '' }}"
       # 运行 python 脚本文件，其中的参数取 secrets 中配置的加密参数，账户名和密码
       - name: Working
         run: |
