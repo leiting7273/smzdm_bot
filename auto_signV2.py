@@ -6,10 +6,15 @@ import time
 import requests
 import re,json
 import sys
+import os
 
-COOKIE = sys.argv[1]
-SK = sys.argv[2]
-TOKEN = sys.argv[3]
+COOKIE = os.environ.get('COOKIE')
+SK = os.environ.get('SK')
+TOKEN = os.environ.get('TOKEN')
+
+# COOKIE = sys.argv[1]
+# SK = sys.argv[2]
+# TOKEN = sys.argv[3]
 
 key = 'apr1$AwP!wRRT$gJ/q.X24poeBInlUJC'
 user_tuple = (
