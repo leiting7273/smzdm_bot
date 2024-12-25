@@ -7,7 +7,7 @@ on:
   # 在推送到 master 分支时会自动运行一次
   push:
     branches: 
-      - master
+      - main
   # 可以设定定时任务执行
 #   schedule:
     # UTC 0 点 30 定期执行一次，跟北京时间大概相距8小时，但因为排队可能会稍微延后半小时左右
@@ -39,11 +39,11 @@ jobs:
       # 运行 python 脚本文件，其中的参数取 secrets 中配置的加密参数，账户名和密码
       - name: Working
         run: |
-          random_time=$(($RANDOM % 3))
+          random_time=$(($RANDOM % 0))    
           echo "等待 ${random_time} 分钟后开始签到"
           for((i=1;i<=${random_time};i++));  
           do
           echo "倒计时 $[${random_time}-$i] 分钟"
-          sleep 1m
+          # sleep 1m
           done
           python auto_signV2.py ${{ secrets.COOKIE }} ${{ secrets.SK }}  ${{ secrets.TOKEN }}
