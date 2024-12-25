@@ -54,4 +54,3 @@ jobs:
           sleep 1m
           done
           python auto_signV2.py 
-      #${{ secrets.COOKIE }} ${{ secrets.SK }}  ${{ secrets.TOKEN }}
