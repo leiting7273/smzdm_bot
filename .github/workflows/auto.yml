@@ -12,7 +12,7 @@ on:
   schedule:
     # UTC 22 点 34 定期执行一次，跟北京时间大概相距8小时，但因为排队可能会稍微延后半小时左右
     # 即北京时间 5 点 34 以后
-    - cron: '13 6 * * *'
+    - cron: '13 0 * * *'
 
   workflow_dispatch:
 
@@ -50,7 +50,7 @@ jobs:
           SK: ${{ secrets.SK }}
           TOKEN: ${{ secrets.TOKEN }}
         run: |
-          random_time=$(($RANDOM % 0))    
+          random_time=$(($RANDOM % 17))    
           echo "等待 ${random_time} 分钟后开始签到"
           for((i=1;i<=${random_time};i++));  
           do
