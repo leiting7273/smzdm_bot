@@ -7,7 +7,7 @@ on:
   # 在推送到 master 分支时会自动运行一次
   push:
     branches: 
-      - main
+      - master
   # 可以设定定时任务执行
 #   schedule:
     # UTC 0 点 30 定期执行一次，跟北京时间大概相距8小时，但因为排队可能会稍微延后半小时左右
