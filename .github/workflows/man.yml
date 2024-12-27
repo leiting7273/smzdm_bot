@@ -49,12 +49,5 @@ jobs:
           COOKIE: ${{ secrets.COOKIE }}
           SK: ${{ secrets.SK }}
           TOKEN: ${{ secrets.TOKEN }}
-        run: |
-          random_time=$(($RANDOM % 0))    
-          echo "等待 ${random_time} 分钟后开始签到"
-          for((i=1;i<=${random_time};i++));  
-          do
-          echo "倒计时 $[${random_time}-$i] 分钟"
-          # sleep 1m
-          done
+        run: 
           python auto_signV2.py
