@@ -1,0 +1,57 @@
+name: main
+
+on:
+  push:
+    branches:
+      - main
+  # schedule:
+  #   - cron: '34 22 * * *'   # 可选定时任务，默认注释
+  workflow_dispatch:
+
+jobs:
+  auto_sign:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install requirements
+        run: pip install -r requirements.txt
+
+      - name: Check secrets
+        run: |
+          echo "准备运行脚本"
+          echo "COOKIE is set: ${{ secrets.COOKIE != '' }}"
+          echo "SK is set: ${{ secrets.SK != '' }}"
+          echo "TOKEN is set: ${{ secrets.TOKEN != '' }}"
+
+      - name: Working
+        env:
+          COOKIE: ${{ secrets.COOKIE }}
+          SK: ${{ secrets.SK }}
+          TOKEN: ${{ secrets.TOKEN }}
+        run: python auto_signV2.py
+
+      - name: Send notification to WeChat Work
+        if: always()
+        env:
+          WEBHOOK_URL: ${{ secrets.WECHAT_WEBHOOK_URL }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          if [ "$JOB_STATUS" = "success" ]; then
+            STATUS_EMOJI="✅"
+            STATUS_TEXT="成功"
+          else
+            STATUS_EMOJI="❌"
+            STATUS_TEXT="失败"
+          fi
+          MESSAGE="${STATUS_EMOJI} 手动/推送触发签到 ${STATUS_TEXT}\n时间: $(date '+%Y-%m-%d %H:%M:%S')\n触发方式: ${{ github.event_name }}\n仓库: ${{ github.repository }}\n运行编号: ${{ github.run_id }}"
+          curl -X POST -H "Content-Type: application/json" \
+            -d "{\"msgtype\":\"text\",\"text\":{\"content\":\"${MESSAGE}\"}}" \
+            "$WEBHOOK_URL"
